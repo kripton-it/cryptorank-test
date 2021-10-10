@@ -5,7 +5,7 @@ const Layout: FC = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main className='main'>{children}</main>
     </>
   )
 }

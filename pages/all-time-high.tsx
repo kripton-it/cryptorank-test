@@ -1,6 +1,8 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../styles/ATH.module.css'
+
+import Table from '../components/Table'
+import Title from '../components/Title'
 
 interface IAllTimeHighProps {
   athPrice: number
@@ -10,16 +12,21 @@ interface IAllTimeHighProps {
 const AllTimeHigh: NextPage<IAllTimeHighProps> = ({ athPrice, price }) => {
   const fromAth = (1 - price / athPrice) * 100
   const toAth = (athPrice / price - 1) * 100
+
   return (
-    <div className={styles.container}>
+    <div className='container'>
       <Head>
         <title>Cryptorank Test App - ATH Task</title>
-        <meta name="description" content="All Time High" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name='description' content='All Time High' />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='main'>
-        <table className={styles.table}>
+      <>
+        <Title>
+          Bitcoin/USD All Time High Information
+        </Title>
+
+        <Table>
           <thead>
             <tr>
               <th>Price</th>
@@ -32,12 +39,12 @@ const AllTimeHigh: NextPage<IAllTimeHighProps> = ({ athPrice, price }) => {
             <tr>
               <td>{price.toFixed(2)}</td>
               <td>{athPrice.toFixed(2)}</td>
-              <td>{`${fromAth.toFixed(2)} %`}</td>
-              <td>{`${toAth.toFixed(2)} %`}</td>
+              <td>{`${fromAth.toFixed(2)}%`}</td>
+              <td>{`${toAth.toFixed(2)}%`}</td>
             </tr>
           </tbody>
-        </table>
-      </main>
+        </Table>
+      </>
     </div>
   )
 }
@@ -45,7 +52,7 @@ const AllTimeHigh: NextPage<IAllTimeHighProps> = ({ athPrice, price }) => {
 export default AllTimeHigh
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(`https://tstapi.cryptorank.io/v0/coins/bitcoin`)
+  const res = await fetch('https://tstapi.cryptorank.io/v0/coins/bitcoin')
   const { data } = await res.json()
 
   if (!data) {

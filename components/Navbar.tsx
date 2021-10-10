@@ -1,19 +1,36 @@
 import Link from 'next/link'
 import { FC } from 'react'
+import styled from 'styled-components'
 
-import styles from '../styles/Header.module.css'
+const StyledHeader = styled.header`
+  display: flex;
+  width: 40rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+`
+
+const StyledLink = styled.a`
+  font-size: 1.5rem;
+  color: #000000;
+  cursor: pointer;
+`
 
 const Navbar: FC = () => {
   return (
-    <header className={styles.header}>
-        <Link href='/'>
-            <a>Home</a>
-        </Link>
+    <StyledHeader>
+      <Link href='/'>
+        <StyledLink>Converter</StyledLink>
+      </Link>
 
-        <Link href='/all-time-high'>
-            <a>All Time High</a>
-        </Link>
-    </header>
+      <Link href='/all-time-high'>
+        <StyledLink>All Time High</StyledLink>
+      </Link>
+    </StyledHeader>
   )
 }
 
